@@ -12,5 +12,12 @@
     <groupId>com.xxx.clients.cinema</groupId>
     <artifactId>cinema-starter</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.xxx.clients.cinema</groupId>
+            <artifactId>cinema-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

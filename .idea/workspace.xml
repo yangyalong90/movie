@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bbab07b6-7ec0-4d87-8597-2f039d0a193c" name="Default Changelist" comment="" />
+    <list default="true" id="bbab07b6-7ec0-4d87-8597-2f039d0a193c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/cinema/cinema-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/cinema/cinema-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/cinema/cinema-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/cinema/cinema-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/user/user-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/user/user-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/user/user-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/user/user-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eureka/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eureka/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\java\apache-maven-3.6.0-bin\repository" />
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="userSettingsFile" value="D:\java\apache-maven-3.6.0-bin\apache-maven-3.6.0\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1kBufVKaRZQ1j1dJ9qf6poUzrET" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,6 +51,59 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+  </component>
+  <component name="RunManager" selected="Application.UserApp">
+    <configuration name="CinemaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xxx.movie.cinema.CinemaApp" />
+      <module name="cinema-starter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xxx.movie.cinema.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xxx.movie.eureka.EurekaServerApp" />
+      <module name="eureka" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xxx.movie.eureka.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xxx.movie.user.UserApp" />
+      <module name="user-starter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xxx.movie.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UserApp" />
+        <item itemvalue="Application.CinemaApp" />
+        <item itemvalue="Application.EurekaServerApp" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -30,9 +119,72 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="179" key="#Project_Structure" timestamp="1605192579917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="179" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1605192579917" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605191157784">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605191157784" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1605193547644">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1605193547644" />
+    <state x="740" y="278" key="FileChooserDialogImpl" timestamp="1605188028524">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="278" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605188028524" />
+    <state width="1877" height="428" key="GridCell.Tab.0.bottom" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.0.center" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.0.left" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.0.right" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.1.bottom" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.1.center" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.1.left" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state width="1877" height="428" key="GridCell.Tab.1.right" timestamp="1605194364765">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="428" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605194364765" />
+    <state x="463" y="165" key="SettingsEditor" timestamp="1605193875518">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1605193875518" />
     <state x="334" y="224" key="new project wizard" timestamp="1605187008392">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="224" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1605187008392" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/clients/cinema/cinema-core/src/main/java/com/xxx/movie/cinema/controller/CinemaController.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

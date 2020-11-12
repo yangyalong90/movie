@@ -8,10 +8,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="user-core" />
         <module name="common" />
-        <module name="user-export" />
         <module name="cinema-export" />
         <module name="eureka" />
         <module name="cinema-starter" />
+        <module name="user-export" />
         <module name="user-starter" />
         <module name="cinema-core" />
       </profile>
