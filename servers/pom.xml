@@ -9,15 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xxx.movie</groupId>
-    <artifactId>eureka</artifactId>
+    <artifactId>servers</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>eureka</module>
+    </modules>
 
 
 </project>

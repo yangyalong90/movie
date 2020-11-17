@@ -15,9 +15,9 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>eureka</module>
         <module>clients</module>
         <module>common</module>
+        <module>servers</module>
     </modules>
 
     <dependencyManagement>

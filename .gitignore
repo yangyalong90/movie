@@ -1,3 +1,7 @@
 /.idea
 */target/*
 */*.iml
+/servers/eureka/target/classes/application.yml
+/servers/servers/eureka/target/classes/application.yml
+/servers/servers/eureka/target/classes/META-INF/eureka.kotlin_module
+/servers/eureka/target/classes/com/xxx/movie/eureka/EurekaServerApp.class
