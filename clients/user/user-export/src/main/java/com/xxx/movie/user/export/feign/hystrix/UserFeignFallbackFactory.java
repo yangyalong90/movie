@@ -19,7 +19,7 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
         return new UserClientFallback(throwable);
     }
 
-    class UserClientFallback implements UserFeignClient {
+    static class UserClientFallback implements UserFeignClient {
 
         Throwable cause;
 
