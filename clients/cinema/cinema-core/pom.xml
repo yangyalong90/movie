@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>cinema</artifactId>
-        <groupId>com.xxx.clients</groupId>
+        <groupId>com.xxx.movie.clients</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xxx.clients.cinema</groupId>
+    <groupId>com.xxx.movie.clients.cinema</groupId>
     <artifactId>cinema-core</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.xxx.clients.user</groupId>
+            <groupId>com.xxx.movie.clients.user</groupId>
             <artifactId>user-export</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

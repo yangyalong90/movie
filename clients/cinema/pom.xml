@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.xxx.clients</groupId>
+    <groupId>com.xxx.movie.clients</groupId>
     <artifactId>cinema</artifactId>
     <packaging>pom</packaging>
     <modules>
