@@ -2,9 +2,22 @@ package com.xxx.common.model;
 
 public class ApiResult<T> {
 
+    public static final String SUCCESS_CODE = "1";
+    public static final String ERROR_CODE = "0";
+
     private String code;
     private String message;
     private T data;
+
+    public static <T> ApiResult<T> success(T data){
+        return new ApiResult<T>(SUCCESS_CODE, null, data);
+    }
+
+    public ApiResult(String code, String message, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
 
     public String getCode() {
         return code;

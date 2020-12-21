@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
+//@Component
 public class ZuulHandlerAdapter implements HandlerAdapter {
     @Override
     public boolean supports(Object handler) {

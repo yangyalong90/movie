@@ -1,6 +1,6 @@
 package com.xxx.common;
 
-import com.xxx.common.rest.RestConfig;
+import com.xxx.common.rest.config.RestConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
