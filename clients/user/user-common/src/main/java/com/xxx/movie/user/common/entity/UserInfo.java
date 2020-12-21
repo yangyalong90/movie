@@ -1,4 +1,4 @@
-package com.xxx.movie.user.export.dto;
+package com.xxx.movie.user.common.entity;
 
 import lombok.Data;
 

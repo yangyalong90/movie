@@ -1,6 +1,6 @@
 package com.xxx.movie.user.export.feign.hystrix;
 
-import com.xxx.movie.user.export.dto.UserInfo;
+import com.xxx.movie.user.common.entity.UserInfo;
 import com.xxx.movie.user.export.feign.UserFeignClient;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
@@ -33,6 +33,14 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
             System.out.println(cause.getMessage());
 
             return ERROR_USER;
+        }
+
+        @Override
+        public boolean permission(String token, String url) {
+
+            System.out.println(cause.getMessage());
+
+            return false;
         }
     }
 }
