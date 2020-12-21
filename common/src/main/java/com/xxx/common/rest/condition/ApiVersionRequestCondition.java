@@ -11,6 +11,8 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
 
     private String version;
 
+    private boolean maxVersion = false;
+
     public ApiVersionRequestCondition(String version) {
         this.version = version;
     }
@@ -21,6 +23,7 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
      * 而方法上指定的@RequestMapping的 url 为 method -
      * 那么在获取这个接口的 url 匹配规则时，类上扫描一次，方法上扫描一次，
      * 这个时候就需要把这两个合并成一个，表示这个接口匹配root/method
+     *
      * @param other
      * @return
      */
@@ -35,6 +38,12 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
         String version = request.getHeader(API_VERSION_HEADER);
 
         if (StringUtils.isEmpty(version)) {
+
+            // 默认取最新版本
+            if (maxVersion) {
+                return this;
+            }
+
             return null;
         }
 
@@ -48,5 +57,26 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
     @Override
     public int compareTo(ApiVersionRequestCondition other, HttpServletRequest request) {
         return other.version.compareTo(version);
+    }
+
+    @Override
+    public int hashCode() {
+        return version.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ApiVersionRequestCondition)) {
+            return false;
+        }
+        return version.equals(((ApiVersionRequestCondition) obj).version);
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setMaxVersion(boolean maxVersion) {
+        this.maxVersion = maxVersion;
     }
 }
