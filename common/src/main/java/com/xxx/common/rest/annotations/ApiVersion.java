@@ -15,4 +15,6 @@ public @interface ApiVersion {
 
     String value();
 
+    String[] oldFullPath() default {};
+
 }

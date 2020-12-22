@@ -3,15 +3,17 @@ package com.xxx.common.rest.handlers;
 import com.xxx.common.rest.annotations.ApiVersion;
 import com.xxx.common.rest.condition.ApiVersionRequestCondition;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.condition.*;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
@@ -20,22 +22,9 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
     @Override
     protected void registerHandlerMethod(Object handler, Method method, RequestMappingInfo mapping) {
 
-        RequestCondition<?> customCondition = mapping.getCustomCondition();
-        if (customCondition instanceof ApiVersionRequestCondition) {
-            ApiVersionRequestCondition cc = (ApiVersionRequestCondition) customCondition;
-            RequestMappingInfoHashEqual infoHashEqual = new RequestMappingInfoHashEqual(mapping);
-            ApiVersionRequestCondition versionRequestCondition = apiMaxVersion.get(infoHashEqual);
-            if (versionRequestCondition == null) {
-                apiMaxVersion.put(infoHashEqual, cc);
-                cc.setMaxVersion(true);
-            }else {
-                if (cc.getVersion().compareTo(versionRequestCondition.getVersion()) >= 0) {
-                    cc.setMaxVersion(true);
-                    versionRequestCondition.setMaxVersion(false);
-                    apiMaxVersion.put(infoHashEqual, cc);
-                }
-            }
-
+        if (mapping.getCustomCondition() instanceof ApiVersionRequestCondition) {
+            handleMaxVersion(mapping);
+            handleFullPathMapping(mapping, method, handler);
         }
 
         super.registerHandlerMethod(handler, method, mapping);
@@ -50,6 +39,51 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
         }
 
         return null;
+    }
+
+    void handleMaxVersion(RequestMappingInfo mapping) {
+        ApiVersionRequestCondition cc = (ApiVersionRequestCondition) mapping.getCustomCondition();
+        RequestMappingInfoHashEqual infoHashEqual = new RequestMappingInfoHashEqual(mapping);
+        ApiVersionRequestCondition versionRequestCondition = apiMaxVersion.get(infoHashEqual);
+        if (versionRequestCondition == null) {
+            apiMaxVersion.put(infoHashEqual, cc);
+            cc.setMaxVersion(true);
+        } else {
+            if (cc.getVersion().compareTo(versionRequestCondition.getVersion()) >= 0) {
+                cc.setMaxVersion(true);
+                versionRequestCondition.setMaxVersion(false);
+                apiMaxVersion.put(infoHashEqual, cc);
+            }
+        }
+    }
+
+    void handleFullPathMapping(RequestMappingInfo mapping, Method method, Object handler) {
+        ApiVersionRequestCondition cc = (ApiVersionRequestCondition) mapping.getCustomCondition();
+
+        // 处理 oldFullPath
+        ApiVersion apiVersion = AnnotationUtils.findAnnotation(method, ApiVersion.class);
+        if (apiVersion == null) {
+            return;
+        }
+        String[] oldFullPath = apiVersion.oldFullPath();
+        if (oldFullPath.length == 0) {
+            return;
+        }
+
+        RequestMappingInfo mappingInfo = RequestMappingInfo.paths(oldFullPath).build();
+
+        RequestMappingInfo requestMappingInfo = new RequestMappingInfo(mappingInfo.getName(),
+                RequestMappingInfo.paths(oldFullPath).build().getPatternsCondition(),
+                mapping.getMethodsCondition(), mapping.getParamsCondition(),
+                mapping.getHeadersCondition(), mapping.getConsumesCondition(),
+                mapping.getProducesCondition(), null);
+
+        super.registerHandlerMethod(handler, method, requestMappingInfo);
+    }
+
+    @Override
+    protected HandlerMethod getHandlerInternal(HttpServletRequest request) throws Exception {
+        return super.getHandlerInternal(request);
     }
 
     static class RequestMappingInfoHashEqual {

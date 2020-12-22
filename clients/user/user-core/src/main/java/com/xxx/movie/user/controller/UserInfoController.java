@@ -20,7 +20,7 @@ public class UserInfoController {
         return info;
     }
 
-    @ApiVersion("0.1")
+    @ApiVersion(value = "0.1", oldFullPath = "/b/{id}")
     @GetMapping("/{id}")
     public UserInfo queryById2(@PathVariable("id") Long id){
         UserInfo info = new UserInfo();
