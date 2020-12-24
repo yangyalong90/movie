@@ -1,4 +1,4 @@
-package com.xxx.common.rest.annotations;
+package com.xxx.common.version.annotations;
 
 import org.springframework.web.bind.annotation.Mapping;
 

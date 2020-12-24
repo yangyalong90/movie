@@ -1,6 +1,6 @@
 package com.xxx.movie.user.controller;
 
-import com.xxx.common.rest.annotations.ApiVersion;
+import com.xxx.common.version.annotations.ApiVersion;
 import com.xxx.movie.user.common.entity.UserInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

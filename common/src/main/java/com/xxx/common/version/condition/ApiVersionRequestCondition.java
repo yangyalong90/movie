@@ -1,4 +1,4 @@
-package com.xxx.common.rest.condition;
+package com.xxx.common.version.condition;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;

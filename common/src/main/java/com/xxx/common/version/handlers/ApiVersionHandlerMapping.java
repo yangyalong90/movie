@@ -1,7 +1,7 @@
-package com.xxx.common.rest.handlers;
+package com.xxx.common.version.handlers;
 
-import com.xxx.common.rest.annotations.ApiVersion;
-import com.xxx.common.rest.condition.ApiVersionRequestCondition;
+import com.xxx.common.version.annotations.ApiVersion;
+import com.xxx.common.version.condition.ApiVersionRequestCondition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
