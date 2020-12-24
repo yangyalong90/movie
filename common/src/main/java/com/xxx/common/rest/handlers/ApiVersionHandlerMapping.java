@@ -4,7 +4,7 @@ import com.xxx.common.rest.annotations.ApiVersion;
 import com.xxx.common.rest.condition.ApiVersionRequestCondition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.mvc.condition.*;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -13,8 +13,6 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
@@ -31,7 +29,7 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
             handleFullPathMapping(mapping, method, handler);
         }
 
-        super.registerHandlerMethod(handler, method, mapping);
+        super.registerHandlerMethod(handler, method, handlePathPrefix(mapping));
     }
 
     @Override
@@ -45,18 +43,14 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
         return null;
     }
 
-    @Override
-    protected String[] resolveEmbeddedValuesInPatterns(String[] patterns) {
+    RequestMappingInfo handlePathPrefix(RequestMappingInfo info) {
 
-        if (patterns != null && patterns.length != 0) {
-            String[] s = new String[patterns.length];
-            for (int index = 0; index < patterns.length; index ++) {
-                s[index] = serverPath + patterns[index];
-            }
-            patterns = s;
+        if (StringUtils.isEmpty(serverPath)) {
+            return info;
         }
 
-        return super.resolveEmbeddedValuesInPatterns(patterns);
+        return RequestMappingInfo.paths(serverPath).build().combine(info);
+
     }
 
     void handleMaxVersion(RequestMappingInfo mapping) {
