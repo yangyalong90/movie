@@ -2,22 +2,26 @@ package com.xxx.common.rest.handlers;
 
 import com.xxx.common.rest.annotations.ApiVersion;
 import com.xxx.common.rest.condition.ApiVersionRequestCondition;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.condition.*;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
     private Map<RequestMappingInfoHashEqual, ApiVersionRequestCondition> apiMaxVersion = new HashMap<>();
+
+    @Value("${server.path}")
+    private String serverPath = "";
 
     @Override
     protected void registerHandlerMethod(Object handler, Method method, RequestMappingInfo mapping) {
@@ -41,6 +45,20 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
         return null;
     }
 
+    @Override
+    protected String[] resolveEmbeddedValuesInPatterns(String[] patterns) {
+
+        if (patterns != null && patterns.length != 0) {
+            String[] s = new String[patterns.length];
+            for (int index = 0; index < patterns.length; index ++) {
+                s[index] = serverPath + patterns[index];
+            }
+            patterns = s;
+        }
+
+        return super.resolveEmbeddedValuesInPatterns(patterns);
+    }
+
     void handleMaxVersion(RequestMappingInfo mapping) {
         ApiVersionRequestCondition cc = (ApiVersionRequestCondition) mapping.getCustomCondition();
         RequestMappingInfoHashEqual infoHashEqual = new RequestMappingInfoHashEqual(mapping);
@@ -58,7 +76,6 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
     }
 
     void handleFullPathMapping(RequestMappingInfo mapping, Method method, Object handler) {
-        ApiVersionRequestCondition cc = (ApiVersionRequestCondition) mapping.getCustomCondition();
 
         // 处理 oldFullPath
         ApiVersion apiVersion = AnnotationUtils.findAnnotation(method, ApiVersion.class);
@@ -79,11 +96,6 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
                 mapping.getProducesCondition(), null);
 
         super.registerHandlerMethod(handler, method, requestMappingInfo);
-    }
-
-    @Override
-    protected HandlerMethod getHandlerInternal(HttpServletRequest request) throws Exception {
-        return super.getHandlerInternal(request);
     }
 
     static class RequestMappingInfoHashEqual {
