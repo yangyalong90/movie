@@ -18,8 +18,8 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
     private Map<RequestMappingInfoHashEqual, ApiVersionRequestCondition> apiMaxVersion = new HashMap<>();
 
-    @Value("${server.path}")
-    private String serverPath = "";
+    @Value("${server.path:\"\"}")
+    private String serverPath;
 
     @Override
     protected void registerHandlerMethod(Object handler, Method method, RequestMappingInfo mapping) {

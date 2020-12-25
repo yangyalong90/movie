@@ -1,6 +1,5 @@
 package com.xxx.movie.zuul.handlers;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.ModelAndView;
 
