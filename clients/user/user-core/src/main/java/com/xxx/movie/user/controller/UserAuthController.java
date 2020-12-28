@@ -1,9 +1,12 @@
 package com.xxx.movie.user.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.xxx.common.model.ApiResult;
+import com.xxx.common.security.detail.UserAuthority;
+import com.xxx.common.security.detail.UserDetail;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -15,6 +18,16 @@ public class UserAuthController {
 
         return true;
 
+    }
+
+    @PostMapping("/details")
+    public UserDetail details(@RequestParam("username") String username) {
+        UserDetail userDetail = new UserDetail(username, "1");
+        List<UserAuthority> userAuthorities = new ArrayList<>();
+        UserAuthority userAuthority = new UserAuthority();
+        userAuthority.setAuthority("a");
+        userDetail.setAuthorities(userAuthorities);
+        return userDetail;
     }
 
 }

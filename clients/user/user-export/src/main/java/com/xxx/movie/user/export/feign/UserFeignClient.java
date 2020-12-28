@@ -1,10 +1,12 @@
 package com.xxx.movie.user.export.feign;
 
+import com.xxx.common.security.detail.UserDetail;
 import com.xxx.movie.user.common.entity.UserInfo;
 import com.xxx.movie.user.export.feign.hystrix.UserFeignFallbackFactory;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "user", fallbackFactory = UserFeignFallbackFactory.class)
@@ -15,5 +17,8 @@ public interface UserFeignClient {
 
     @GetMapping("/user/auth/permission")
     boolean permission(@RequestParam("token") String token, @RequestParam("url") String url);
+
+    @PostMapping("/user/auth/details")
+    UserDetail authDetails(@RequestParam("username") String username);
 
 }

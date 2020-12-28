@@ -1,5 +1,6 @@
 package com.xxx.movie.user.export.feign.hystrix;
 
+import com.xxx.common.security.detail.UserDetail;
 import com.xxx.movie.user.common.entity.UserInfo;
 import com.xxx.movie.user.export.feign.UserFeignClient;
 import feign.hystrix.FallbackFactory;
@@ -41,6 +42,11 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
             System.out.println(cause.getMessage());
 
             return false;
+        }
+
+        @Override
+        public UserDetail authDetails(String username) {
+            return null;
         }
     }
 }

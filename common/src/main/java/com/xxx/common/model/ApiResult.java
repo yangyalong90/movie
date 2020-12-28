@@ -13,6 +13,14 @@ public class ApiResult<T> {
         return new ApiResult<T>(SUCCESS_CODE, null, data);
     }
 
+    public static <T> ApiResult<T> error(){
+        return new ApiResult<T>(ERROR_CODE, null, null);
+    }
+
+    public static <T> ApiResult<T> error(String message){
+        return new ApiResult<T>(ERROR_CODE, message, null);
+    }
+
     public ApiResult(String code, String message, T data) {
         this.code = code;
         this.message = message;
