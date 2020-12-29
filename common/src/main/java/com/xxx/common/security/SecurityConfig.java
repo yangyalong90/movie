@@ -6,6 +6,7 @@ import com.xxx.common.security.detail.UserDetail;
 import com.xxx.common.security.handler.*;
 import com.xxx.common.security.handler.url.UrlAccessDecision;
 import com.xxx.common.security.handler.url.UrlAccessDeniedHandler;
+import com.xxx.common.security.handler.url.UrlResourceDecider;
 import com.xxx.common.security.jwt.JWTConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -36,6 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private TokenHandler tokenHandler;
 
+    @Autowired
+    private UrlResourceDecider urlResourceDecider;
+
     @Autowired(required = false)
     private AuthenticationProvider authenticationProvider;
 
@@ -51,31 +55,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         UrlAccessDeniedHandler accessDeniedHandler = new UrlAccessDeniedHandler();
         http.authorizeRequests()
+                // 所有请求都需要权限认证
                 .anyRequest().authenticated()
                 .and()
                 .antMatcher("/**").authorizeRequests()
+                // 设置访问请求决策控制
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O object) {
-                        object.setAccessDecisionManager(new UrlAccessDecision());
+                        object.setAccessDecisionManager(new UrlAccessDecision(urlResourceDecider));
                         return object;
                     }
                 })
                 .and()
+                // 禁用session manage
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                // 设置登录
                 .formLogin()
                 .loginProcessingUrl("/user/user/auth/login")
+                // 设置登录成功handler
                 .successHandler(authenticationHandler)
+                // 设置登录失败handler
                 .failureHandler(authenticationHandler)
                 .and()
+                // 登出 url
                 .logout().logoutUrl("/logout")
                 .and()
+                // 禁用 csrf
                 .csrf().disable()
+                // 添加token filter，主要根据request信息生成 authentication
                 .addFilter(new AuthenticationTokenFilter(authenticationManager(), tokenHandler))
+                // 设置异常处理器
                 .exceptionHandling()
+                // （未授权）访问拒绝处理
                 .accessDeniedHandler(accessDeniedHandler)
+                // 未认证处理
                 .authenticationEntryPoint(accessDeniedHandler);
     }
 
@@ -101,6 +117,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @ConditionalOnMissingBean
     public TokenCache tokenCache() {
         return new DefaultTokenCache();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public UrlResourceDecider urlResourceDecider(){
+        return (auth, request) -> {};
     }
 
 }

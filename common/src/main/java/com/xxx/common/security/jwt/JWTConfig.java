@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 public class JWTConfig {
 
     @Bean
-    public TokenProvider tokenProvider(){
-        return new TokenProvider();
+    public JWTTokenProvider tokenProvider(){
+        return new JWTTokenProvider();
     }
 
     @Bean

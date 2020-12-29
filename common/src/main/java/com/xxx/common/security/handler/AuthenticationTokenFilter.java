@@ -16,6 +16,8 @@ import java.io.IOException;
 
 public class AuthenticationTokenFilter extends BasicAuthenticationFilter {
 
+    private static final String AUTH_HEADER = "X-Authorization";
+
     private TokenHandler tokenHandler;
 
     public AuthenticationTokenFilter(AuthenticationManager authenticationManager, TokenHandler tokenHandler) {
@@ -26,7 +28,7 @@ public class AuthenticationTokenFilter extends BasicAuthenticationFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
-        if (StringUtils.isEmpty(request.getHeader("AUTH"))) {
+        if (StringUtils.isEmpty(request.getHeader(AUTH_HEADER))) {
             return true;
         }
 
@@ -36,7 +38,7 @@ public class AuthenticationTokenFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String token = request.getHeader("AUTH");
+        String token = request.getHeader(AUTH_HEADER);
         Authentication authentication = tokenHandler.detail(token);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

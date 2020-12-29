@@ -1,11 +1,9 @@
 package com.xxx.movie.zuul.security.service;
 
-import com.netflix.client.ClientException;
 import com.xxx.common.security.detail.UserDetail;
 import com.xxx.common.security.exception.LoginErrorException;
 import com.xxx.common.security.service.AbstractUserDetailService;
 import com.xxx.movie.user.export.feign.UserFeignClient;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 

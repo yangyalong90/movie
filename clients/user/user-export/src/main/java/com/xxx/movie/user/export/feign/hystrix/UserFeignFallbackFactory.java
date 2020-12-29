@@ -2,9 +2,12 @@ package com.xxx.movie.user.export.feign.hystrix;
 
 import com.xxx.common.security.detail.UserDetail;
 import com.xxx.movie.user.common.entity.UserInfo;
+import com.xxx.movie.user.common.model.auth.UrlResource;
 import com.xxx.movie.user.export.feign.UserFeignClient;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient> {
@@ -46,6 +49,11 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeignClient
 
         @Override
         public UserDetail authDetails(String username) {
+            return null;
+        }
+
+        @Override
+        public List<UrlResource> ignoreUrls(String application) {
             return null;
         }
     }

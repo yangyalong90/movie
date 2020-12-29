@@ -1,11 +1,12 @@
 package com.xxx.movie.user.controller;
 
-import com.xxx.common.model.ApiResult;
 import com.xxx.common.security.detail.UserAuthority;
 import com.xxx.common.security.detail.UserDetail;
+import com.xxx.movie.user.common.model.auth.UrlResource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -17,6 +18,16 @@ public class UserAuthController {
                               @RequestParam("url") String url) {
 
         return true;
+
+    }
+
+    @GetMapping("/ignore/urls")
+    public List<UrlResource> ignoreUrls(@RequestParam(value = "application", required = false) String application){
+
+        UrlResource resource = new UrlResource();
+        resource.setApplication("user");
+        resource.setUrls(Collections.singletonList("/user/info/{id}"));
+        return Collections.singletonList(resource);
 
     }
 
