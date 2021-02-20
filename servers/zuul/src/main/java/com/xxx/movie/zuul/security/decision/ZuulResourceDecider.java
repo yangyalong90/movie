@@ -11,10 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
-import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -23,6 +21,8 @@ public class ZuulResourceDecider implements UrlResourceDecider {
     private UserFeignClient userFeignClient;
 
     private RouteLocator routeLocator;
+
+    private PathMatcher pathMatcher = new AntPathMatcher();
 
     public ZuulResourceDecider(UserFeignClient userFeignClient, RouteLocator routeLocator) {
         this.userFeignClient = userFeignClient;
@@ -51,17 +51,13 @@ public class ZuulResourceDecider implements UrlResourceDecider {
                             }
                             return urlResource.getUrls()
                                     .stream()
-                                    .anyMatch(s -> {
-                                        PathMatcher pathMatcher = new AntPathMatcher();
-                                        return pathMatcher.match(s, path);
-                                    });
+                                    .anyMatch(s -> pathMatcher.match(s, path));
                         });
 
         if (authentication instanceof AnonymousAuthenticationToken && !ignoreMatch) {
             throw new AccessDeniedException("");
         }
 
-        System.out.println(requestURI);
     }
 
 
