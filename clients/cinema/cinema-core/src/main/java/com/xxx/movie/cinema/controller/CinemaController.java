@@ -1,6 +1,6 @@
 package com.xxx.movie.cinema.controller;
 
-import com.xxx.movie.user.export.dto.UserInfo;
+import com.xxx.movie.user.common.entity.UserInfo;
 import com.xxx.movie.user.export.feign.UserFeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
