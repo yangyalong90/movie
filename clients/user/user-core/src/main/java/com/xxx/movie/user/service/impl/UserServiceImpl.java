@@ -20,6 +20,6 @@ public class UserServiceImpl implements UserService {
     public List<UserInfo> selectAll() {
         UserInfo userInfo = new UserInfo();
         UserInfo userInfo1 = userMapper.selectById(1);
-        return userMapper.selectList(userInfo);
+        return null;
     }
 }
