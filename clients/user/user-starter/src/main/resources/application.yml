@@ -10,6 +10,11 @@ spring:
     url: jdbc:mysql://47.105.77.138:3360/xxx_movie?useSSL=false
     username: root
     password: passwd
+  redis:
+    database: 0
+    host: 47.95.9.128
+    port: 6397
+    password:
 
 eureka:
   instance:
