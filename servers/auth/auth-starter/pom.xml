@@ -3,20 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>movie</artifactId>
-        <groupId>com.xxx</groupId>
+        <artifactId>auth</artifactId>
+        <groupId>com.xxx.servers</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>servers</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>eureka</module>
-        <module>zuul</module>
-        <module>auth</module>
-    </modules>
+    <groupId>com.xxx.servers.auth</groupId>
+    <artifactId>auth-starter</artifactId>
 
 
 </project>
