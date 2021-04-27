@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xxx.server</groupId>
-    <artifactId>auth</artifactId>
+    <artifactId>sys</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>sys-server</module>
@@ -27,6 +27,10 @@
             <groupId>com.xxx.movie</groupId>
             <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
 

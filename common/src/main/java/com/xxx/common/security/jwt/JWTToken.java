@@ -12,14 +12,14 @@ public class JWTToken extends AbstractAuthenticationToken {
     private UserDetail detail;
 
     public JWTToken(String token, UserDetail detail) {
-        super(detail.getAuthorities());
+        super(detail == null ? null : detail.getAuthorities());
         this.token = token;
         this.detail = detail;
     }
 
     @Override
     public Object getCredentials() {
-        return token;
+        return token == null ? "" : token;
     }
 
     @Override

@@ -21,7 +21,8 @@ import java.util.List;
 public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore, ApplicationListener<ApplicationStartedEvent> {
 
     private static final String REGISTER_LOCK_KEY = "REGISTER_LOCK_KEY";
-    private List<String> urls = new LinkedList<>();
+    public static final String SIGN = "#&#";
+    private List<RegisterBodyUrl> urls = new LinkedList<>();
 
     @Autowired
     private RedisReentrantLock redisReentrantLock;
@@ -33,15 +34,18 @@ public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore
 
     @Override
     public void execute(Object handler, Method method, RequestMappingInfo mapping) {
-        IgnoreSecurityUrl ignoreSecurityUrl = AnnotationUtils.findAnnotation(method, IgnoreSecurityUrl.class);
-        if (ignoreSecurityUrl != null) {
-            return;
-        }
         String pattern = mapping2Pattern(mapping);
         if (StringUtils.isEmpty(pattern)) {
             return;
         }
-        urls.add(pattern);
+
+        IgnoreSecurityUrl ignoreSecurityUrl = AnnotationUtils.findAnnotation(method, IgnoreSecurityUrl.class);
+        RegisterBodyUrl url = new RegisterBodyUrl();
+        if (ignoreSecurityUrl != null) {
+            url.setIgnore("1");
+        }
+        url.setUrl(pattern);
+        urls.add(url);
     }
 
     String mapping2Pattern(RequestMappingInfo mappingInfo) {
@@ -52,7 +56,7 @@ public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore
         }
         String method = methodsCondition.getMethods().toArray()[0].toString();
         String pattern = patternsCondition.getPatterns().toArray()[0].toString();
-        return method + "[::]" + pattern;
+        return method + SIGN + pattern;
     }
 
     @Override
@@ -60,7 +64,7 @@ public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore
         if (!urls.isEmpty() && redisReentrantLock.lock(REGISTER_LOCK_KEY)) {
             RegisterBody registerBody = new RegisterBody();
             registerBody.setUrls(urls);
-            registerBody.setApplication(application);
+            registerBody.setAppId(application);
             register(registerBody);
         }
         urls.clear();
@@ -69,8 +73,14 @@ public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore
 
     @Data
     public static class RegisterBody {
-        private String application;
-        private List<String> urls;
+        private String appId;
+        private List<RegisterBodyUrl> urls = new LinkedList<>();
+    }
+
+    @Data
+    public static class RegisterBodyUrl {
+        private String url;
+        private String ignore = "0";
     }
 
 }

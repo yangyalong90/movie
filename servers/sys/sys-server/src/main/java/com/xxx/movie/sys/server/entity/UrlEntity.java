@@ -11,7 +11,7 @@ import lombok.Data;
 public class UrlEntity {
     @TableId(type = IdType.AUTO)
     private Long id;
-    private String application;
+    private String appId;
     private String url;
-    private String type;
+    private String isIgnore = "0";
 }

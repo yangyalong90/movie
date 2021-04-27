@@ -26,16 +26,6 @@ public class AuthenticationTokenFilter extends BasicAuthenticationFilter {
     }
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-
-        if (StringUtils.isEmpty(request.getHeader(AUTH_HEADER))) {
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String token = request.getHeader(AUTH_HEADER);

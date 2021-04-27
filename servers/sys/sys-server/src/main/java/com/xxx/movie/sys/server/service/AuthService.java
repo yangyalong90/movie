@@ -4,7 +4,7 @@ import com.xxx.common.security.handler.url.SecurityUrlRegister;
 
 public interface AuthService {
 
-    boolean permission(String token, String url);
+    boolean permission(String token, String appId, String url);
 
     void register(SecurityUrlRegister.RegisterBody registerBody);
 

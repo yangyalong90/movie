@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: auth
+    name: sys
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.105.77.138:3360/xxx_movie?useSSL=false

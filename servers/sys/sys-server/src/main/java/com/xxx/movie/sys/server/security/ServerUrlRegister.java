@@ -1,11 +1,13 @@
 package com.xxx.movie.sys.server.security;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.xxx.common.security.handler.url.SecurityUrlRegister;
 import com.xxx.movie.sys.server.dao.UrlMapper;
 import com.xxx.movie.sys.server.entity.UrlEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ServerUrlRegister extends SecurityUrlRegister {
 
     private UrlMapper urlMapper;
@@ -17,11 +19,13 @@ public class ServerUrlRegister extends SecurityUrlRegister {
     @Override
     public void register(RegisterBody registerBody) {
         // do nothing
-        String application = registerBody.getApplication();
+        String appId = registerBody.getAppId();
+        urlMapper.delete(new UpdateWrapper<UrlEntity>().lambda().eq(UrlEntity::getAppId, appId));
         registerBody.getUrls().forEach(url -> {
             UrlEntity urlEntity = new UrlEntity();
-            urlEntity.setApplication(application);
-            urlEntity.setUrl(url);
+            urlEntity.setAppId(appId);
+            urlEntity.setUrl(url.getUrl());
+            urlEntity.setIsIgnore(url.getIgnore());
             urlMapper.insert(urlEntity);
         });
 
