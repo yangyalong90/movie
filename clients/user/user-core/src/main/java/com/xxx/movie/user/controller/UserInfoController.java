@@ -40,7 +40,7 @@ public class UserInfoController {
     public UserInfo queryById(@PathVariable("id") Long id) {
         UserInfo info = new UserInfo();
         info.setId(id);
-        info.setName("0.3");
+        info.setUsername("0.3");
         return info;
     }
 
@@ -49,7 +49,7 @@ public class UserInfoController {
     public UserInfo queryById2(@PathVariable("id") Long id) {
         UserInfo info = new UserInfo();
         info.setId(id);
-        info.setName("0.1");
+        info.setUsername("0.1");
         return info;
     }
 
@@ -57,7 +57,7 @@ public class UserInfoController {
     public UserInfo queryById3() {
         UserInfo info = new UserInfo();
         info.setId(7L);
-        info.setName("0.13");
+        info.setUsername("0.13");
         return info;
     }
 

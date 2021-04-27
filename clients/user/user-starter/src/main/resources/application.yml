@@ -1,6 +1,5 @@
 server:
   port: 8082
-  path: /user
 
 spring:
   application:
@@ -14,6 +13,9 @@ spring:
     database: 0
     host: 47.95.9.128
     port: 6397
+  security:
+    login-url: /auth/login
+    logout-url: /auth/logout
 
 eureka:
   instance:

@@ -2,24 +2,29 @@ package com.xxx.common.version.handlers;
 
 import com.xxx.common.version.annotations.ApiVersion;
 import com.xxx.common.version.condition.ApiVersionRequestCondition;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.handler.RequestMatchResult;
 import org.springframework.web.servlet.mvc.condition.*;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
 
     private Map<RequestMappingInfoHashEqual, ApiVersionRequestCondition> apiMaxVersion = new HashMap<>();
 
-    @Value("${server.path:\"\"}")
+    @Value("${server.path:}")
     private String serverPath;
+
+    @Autowired(required = false)
+    private List<RegisterHandlerMethodBefore> registerHandlerMethodBeforeList = new LinkedList<>();
 
     @Override
     protected void registerHandlerMethod(Object handler, Method method, RequestMappingInfo mapping) {
@@ -29,7 +34,9 @@ public class ApiVersionHandlerMapping extends RequestMappingHandlerMapping {
             handleFullPathMapping(mapping, method, handler);
         }
 
-        super.registerHandlerMethod(handler, method, handlePathPrefix(mapping));
+        RequestMappingInfo requestMappingInfo = handlePathPrefix(mapping);
+        registerHandlerMethodBeforeList.forEach(r -> r.execute(handler, method, requestMappingInfo));
+        super.registerHandlerMethod(handler, method, requestMappingInfo);
     }
 
     @Override

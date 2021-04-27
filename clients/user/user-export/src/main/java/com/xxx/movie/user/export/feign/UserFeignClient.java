@@ -4,7 +4,7 @@ import com.xxx.common.security.detail.UserDetail;
 import com.xxx.movie.user.common.entity.UserInfo;
 import com.xxx.movie.user.common.model.auth.UrlResource;
 import com.xxx.movie.user.export.feign.hystrix.UserFeignFallbackFactory;
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

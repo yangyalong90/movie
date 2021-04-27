@@ -32,7 +32,6 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        System.out.println("1");
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
         Authentication token = tokenHandler.token(userDetail);
         tokenCache.put(token.getCredentials().toString(), userDetail);

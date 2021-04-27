@@ -8,8 +8,13 @@ import com.xxx.common.security.handler.url.UrlAccessDecision;
 import com.xxx.common.security.handler.url.UrlAccessDeniedHandler;
 import com.xxx.common.security.handler.url.UrlResourceDecider;
 import com.xxx.common.security.jwt.JWTConfig;
+import com.xxx.common.security.service.AbstractUserDetailService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -21,6 +26,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 @Configuration
@@ -43,9 +51,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired(required = false)
     private AuthenticationProvider authenticationProvider;
 
+    @Autowired
+    private SecurityProperties securityProperties;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
         if (authenticationProvider != null) {
             auth.authenticationProvider(authenticationProvider);
         }
@@ -74,14 +88,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // 设置登录
                 .formLogin()
-                .loginProcessingUrl("/user/user/auth/login")
+                .loginProcessingUrl(securityProperties.loginUrl)
                 // 设置登录成功handler
                 .successHandler(authenticationHandler)
                 // 设置登录失败handler
                 .failureHandler(authenticationHandler)
                 .and()
                 // 登出 url
-                .logout().logoutUrl("/logout")
+                .logout().logoutUrl(securityProperties.logoutUrl)
                 .and()
                 // 禁用 csrf
                 .csrf().disable()
@@ -104,7 +118,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @ConditionalOnMissingBean
     public UserDetailsService defaultUserDetailsService() {
-        return username -> new UserDetail(username, "1");
+        return new AbstractUserDetailService() {
+            @Override
+            public UserDetail loadUserDetail(String username) throws UsernameNotFoundException {
+                return new UserDetail(username, "1");
+            }
+        };
     }
 
     @Bean
@@ -120,9 +139,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @ConditionalOnMissingBean
     public UrlResourceDecider urlResourceDecider(){
         return (auth, request) -> {};
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public PasswordEncoder defaultPasswordEncoder(){
+        return new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence rawPassword) {
+                return rawPassword.toString();
+            }
+
+            @Override
+            public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                return encodedPassword.equals(rawPassword.toString());
+            }
+        };
+    }
+
+    @Configuration
+    @ConfigurationProperties("spring.security")
+    @Data
+    public static class SecurityProperties {
+        private static final String LOGIN_URL = "login";
+        private static final String LOGOUT_URL = "logout";
+        private String loginUrl = LOGIN_URL;
+        private String logoutUrl = LOGOUT_URL;
+        private boolean server;
     }
 
 }
