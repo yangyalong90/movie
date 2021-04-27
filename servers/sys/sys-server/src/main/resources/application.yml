@@ -1,0 +1,26 @@
+server:
+  port: 8071
+
+spring:
+  application:
+    name: auth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.105.77.138:3360/xxx_movie?useSSL=false
+    username: root
+    password: passwd
+  redis:
+    database: 0
+    host: 47.95.9.128
+    port: 6397
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+      
+mybatis:
+  configuration:
+    cache-enabled: true

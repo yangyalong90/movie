@@ -76,7 +76,8 @@ public class RedisReentrantLock {
     }
 
     private boolean lock0(String key, String lockedId) {
-        Boolean lock = redisTemplate.opsForValue().setIfPresent(key, lockedId, LOCK_TIMEOUT, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("a","b");
+        Boolean lock = redisTemplate.opsForValue().setIfAbsent(key, lockedId, LOCK_TIMEOUT, TimeUnit.SECONDS);
         if (lock == null || !lock) {
             return false;
         }

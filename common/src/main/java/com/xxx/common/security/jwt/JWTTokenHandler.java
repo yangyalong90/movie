@@ -10,19 +10,16 @@ import java.util.Map;
 import java.util.UUID;
 
 public class JWTTokenHandler implements TokenHandler {
-    private Map<String, Authentication> map = new HashMap<>();
 
     @Override
     public Authentication token(UserDetail detail) {
         String uuid = UUID.randomUUID().toString();
-
         JWTToken token = new JWTToken(uuid, detail);
-        map.put(uuid, token);
         return token;
     }
 
     @Override
     public Authentication detail(String token) {
-        return map.get(token);
+        return new JWTToken(token, null);
     }
 }

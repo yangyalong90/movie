@@ -10,18 +10,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xxx.server</groupId>
-    <artifactId>zuul</artifactId>
+    <artifactId>auth</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>sys-server</module>
+        <module>sys-client</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>com.xxx.movie</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
 
 </project>

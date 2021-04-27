@@ -163,11 +163,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @ConfigurationProperties("spring.security")
     @Data
     public static class SecurityProperties {
-        private static final String LOGIN_URL = "login";
-        private static final String LOGOUT_URL = "logout";
+        private static final String LOGIN_URL = "/login";
+        private static final String LOGOUT_URL = "/logout";
+        private static final String REGISTER_URL = "/register/url";
         private String loginUrl = LOGIN_URL;
         private String logoutUrl = LOGOUT_URL;
-        private boolean server;
+        private String registerUrl = REGISTER_URL;
     }
 
 }
