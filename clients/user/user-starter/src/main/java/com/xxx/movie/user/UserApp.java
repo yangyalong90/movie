@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EnableMybatis
+@EnableSecurity
 public class UserApp {
 
     public static void main(String[] args) {

@@ -4,16 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.xxx.common.model.ApiResult;
 import com.xxx.common.security.cache.TokenCache;
 import com.xxx.common.security.detail.UserDetail;
-import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +32,6 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        System.out.println("1");
         UserDetail userDetail = (UserDetail) authentication.getPrincipal();
         Authentication token = tokenHandler.token(userDetail);
         tokenCache.put(token.getCredentials().toString(), userDetail);
@@ -47,7 +42,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler, Auth
     void writeResponse(ApiResult apiResult, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setStatus(200);
-        response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
+        response.setContentType("application/json");
         PrintWriter writer = response.getWriter();
         writer.write(JSON.toJSONString(apiResult));
     }

@@ -15,6 +15,7 @@
     <modules>
         <module>eureka</module>
         <module>zuul</module>
+        <module>auth</module>
     </modules>
 
 

@@ -43,6 +43,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
@@ -57,16 +62,11 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>cn.yueshutong</groupId>
-            <artifactId>spring-boot-starter-redis-lock</artifactId>
-            <version>1.0.0.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>cn.yueshutong</groupId>-->
+<!--            <artifactId>spring-boot-starter-redis-lock</artifactId>-->
+<!--            <version>1.0.0.RELEASE</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

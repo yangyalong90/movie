@@ -5,12 +5,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public abstract class AbstractUserDetailService implements UserDetailsService {
+public interface AbstractUserDetailService extends UserDetailsService {
+
     @Override
-    public final UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    default UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return loadUserDetail(username);
     }
 
-    public abstract UserDetail loadUserDetail(String username) throws UsernameNotFoundException;
+    UserDetail loadUserDetail(String username) throws UsernameNotFoundException;
 
 }

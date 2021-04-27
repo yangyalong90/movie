@@ -7,7 +7,7 @@
     <parent>
         <artifactId>spring-boot-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>1.5.9.RELEASE</version>
+        <version>2.1.5.RELEASE</version>
     </parent>
 
     <groupId>com.xxx</groupId>
@@ -39,7 +39,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Edgware.RELEASE</version>
+                <version>Greenwich.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -56,6 +56,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus</artifactId>
+                <version>3.4.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.4.2</version>
             </dependency>
             <dependency>
