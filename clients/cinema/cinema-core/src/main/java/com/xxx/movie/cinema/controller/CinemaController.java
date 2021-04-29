@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class CinemaController {
 
-    private UserFeignClient userFeignClient;
-
-    public CinemaController(UserFeignClient userFeignClient) {
-        this.userFeignClient = userFeignClient;
-    }
-
     @GetMapping("/demo/{id}")
     public UserInfo demo(@PathVariable("id") Long id){
-        return userFeignClient.queryById(id);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(id);
+        return userInfo;
+    }
+
+    @GetMapping("/demo2/{id}")
+    public UserInfo demo2(@PathVariable("id") Long id){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(id);
+        return userInfo;
     }
 
 }
