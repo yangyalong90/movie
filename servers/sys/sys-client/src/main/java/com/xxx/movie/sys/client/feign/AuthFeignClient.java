@@ -1,6 +1,6 @@
 package com.xxx.movie.sys.client.feign;
 
-import com.xxx.common.security.handler.url.SecurityUrlRegister;
+import com.xxx.common.register.AppRegister;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface AuthFeignClient {
 
     @PostMapping("/register")
-    void registerUrl(@RequestBody SecurityUrlRegister.RegisterBody registerBody);
+    void registerUrl(@RequestBody AppRegister.RegisterBody registerBody);
 
     @GetMapping("/permission")
     boolean permission(@RequestParam("token") String token,

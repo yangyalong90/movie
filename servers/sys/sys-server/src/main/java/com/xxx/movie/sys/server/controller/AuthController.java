@@ -1,7 +1,7 @@
 package com.xxx.movie.sys.server.controller;
 
 import com.xxx.common.security.handler.url.IgnoreSecurityUrl;
-import com.xxx.common.security.handler.url.SecurityUrlRegister;
+import com.xxx.common.register.AppRegister;
 import com.xxx.movie.sys.server.service.AuthService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @IgnoreSecurityUrl
-    public void register(@RequestBody SecurityUrlRegister.RegisterBody registerBody) {
+    public void register(@RequestBody AppRegister.RegisterBody registerBody) {
 
         authService.register(registerBody);
     }

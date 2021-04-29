@@ -1,7 +1,6 @@
-package com.xxx.movie.sys.server.security;
+package com.xxx.movie.sys.server.common.security;
 
 import com.xxx.common.security.handler.url.UrlResourceDecider;
-import com.xxx.movie.sys.server.dao.UrlMapper;
 import com.xxx.movie.sys.server.service.AuthService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;

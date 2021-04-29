@@ -4,19 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxx.common.security.cache.TokenCache;
 import com.xxx.common.security.detail.UserAuthority;
 import com.xxx.common.security.detail.UserDetail;
-import com.xxx.common.security.handler.url.SecurityUrlRegister;
+import com.xxx.common.register.AppRegister;
 import com.xxx.common.security.service.AbstractUserDetailService;
+import com.xxx.movie.sys.server.common.register.ServerRegister;
 import com.xxx.movie.sys.server.dao.UrlMapper;
 import com.xxx.movie.sys.server.dao.UserMapper;
 import com.xxx.movie.sys.server.dao.UserUrlMapper;
 import com.xxx.movie.sys.server.entity.UrlEntity;
 import com.xxx.movie.sys.server.entity.UserEntity;
 import com.xxx.movie.sys.server.entity.UserUrlEntity;
-import com.xxx.movie.sys.server.security.ServerUrlRegister;
 import com.xxx.movie.sys.server.service.AuthService;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
@@ -34,18 +32,18 @@ public class AuthServiceImpl implements AuthService, AbstractUserDetailService {
     private UrlMapper urlMapper;
     private UserUrlMapper userUrlMapper;
 
-    private ServerUrlRegister urlRegister;
+    private ServerRegister serverRegister;
 
     private TokenCache tokenCache;
 
     private List<UrlEntity> ignoreUrls;
 
     public AuthServiceImpl(UserMapper userMapper, UrlMapper urlMapper, UserUrlMapper userUrlMapper,
-                           ServerUrlRegister urlRegister, @Lazy TokenCache tokenCache) {
+                           ServerRegister serverRegister, @Lazy TokenCache tokenCache) {
         this.userMapper = userMapper;
         this.urlMapper = urlMapper;
         this.userUrlMapper = userUrlMapper;
-        this.urlRegister = urlRegister;
+        this.serverRegister = serverRegister;
         this.tokenCache = tokenCache;
     }
 
@@ -59,7 +57,7 @@ public class AuthServiceImpl implements AuthService, AbstractUserDetailService {
         }
 
         boolean match = ignoreUrls.stream().anyMatch(
-                urlEntity -> pathMatcher.match(urlEntity.getUrl().split(SecurityUrlRegister.SIGN)[1], url)
+                urlEntity -> pathMatcher.match(urlEntity.getUrl().split(AppRegister.SIGN)[1], url)
         );
         if (match) {
             return true;
@@ -68,15 +66,15 @@ public class AuthServiceImpl implements AuthService, AbstractUserDetailService {
 
         return userDetail.getAuthorities().stream().anyMatch(userAuthority -> {
             String authority = userAuthority.getAuthority();
-            String[] split = authority.split(SecurityUrlRegister.SIGN);
+            String[] split = authority.split(AppRegister.SIGN);
             return split[0].equals(appId) && pathMatcher.match(split[2], url);
         });
 
     }
 
     @Override
-    public void register(SecurityUrlRegister.RegisterBody registerBody) {
-        urlRegister.register(registerBody);
+    public void register(AppRegister.RegisterBody registerBody) {
+        serverRegister.register(registerBody);
     }
 
     @Override
@@ -96,7 +94,7 @@ public class AuthServiceImpl implements AuthService, AbstractUserDetailService {
         userDetail.setAuthorities(userUrlEntities.stream().map(userUrlEntity -> {
             UserAuthority userAuthority = new UserAuthority();
             userAuthority.setAuthority(userUrlEntity.getAppId() +
-                    SecurityUrlRegister.SIGN +
+                    AppRegister.SIGN +
                     userUrlEntity.getUrl());
             return userAuthority;
         }).collect(Collectors.toList()));

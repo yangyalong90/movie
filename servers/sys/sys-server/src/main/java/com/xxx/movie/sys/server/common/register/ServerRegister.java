@@ -1,7 +1,7 @@
-package com.xxx.movie.sys.server.security;
+package com.xxx.movie.sys.server.common.register;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.xxx.common.security.handler.url.SecurityUrlRegister;
+import com.xxx.common.register.AppRegister;
 import com.xxx.movie.sys.server.dao.UrlMapper;
 import com.xxx.movie.sys.server.entity.UrlEntity;
 import org.springframework.stereotype.Service;
@@ -10,11 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.stream.Collectors;
 
 @Service
-public class ServerUrlRegister extends SecurityUrlRegister {
-
+public class ServerRegister extends AppRegister {
     private UrlMapper urlMapper;
 
-    public ServerUrlRegister(UrlMapper urlMapper) {
+    public ServerRegister(UrlMapper urlMapper) {
         this.urlMapper = urlMapper;
     }
 

@@ -1,16 +1,15 @@
-package com.xxx.movie.sys.client.security;
+package com.xxx.movie.sys.client.register;
 
-import com.xxx.common.security.handler.url.SecurityUrlRegister;
+import com.xxx.common.register.AppRegister;
 import com.xxx.movie.sys.client.feign.AuthFeignClient;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ClientUrlRegister extends SecurityUrlRegister {
+public class ClientRegister extends AppRegister {
 
     private AuthFeignClient authFeignClient;
 
-    public ClientUrlRegister(AuthFeignClient authFeignClient) {
+    public ClientRegister(AuthFeignClient authFeignClient) {
         this.authFeignClient = authFeignClient;
     }
 

@@ -1,5 +1,6 @@
-package com.xxx.common.security.handler.url;
+package com.xxx.common.register;
 
+import com.xxx.common.security.handler.url.IgnoreSecurityUrl;
 import com.xxx.common.thead.lock.RedisReentrantLock;
 import com.xxx.common.version.handlers.RegisterHandlerMethodBefore;
 import lombok.Data;
@@ -18,7 +19,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore, ApplicationListener<ApplicationStartedEvent> {
+public abstract class AppRegister implements RegisterHandlerMethodBefore, ApplicationListener<ApplicationStartedEvent> {
 
     private static final String REGISTER_LOCK_KEY = "REGISTER_LOCK_KEY";
     public static final String SIGN = "#&#";
@@ -74,6 +75,8 @@ public abstract class SecurityUrlRegister implements RegisterHandlerMethodBefore
     @Data
     public static class RegisterBody {
         private String appId;
+        private String ip;
+        private String activeUrl = "/heart";
         private List<RegisterBodyUrl> urls = new LinkedList<>();
     }
 
