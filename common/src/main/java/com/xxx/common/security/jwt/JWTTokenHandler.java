@@ -12,14 +12,14 @@ import java.util.UUID;
 public class JWTTokenHandler implements TokenHandler {
 
     @Override
-    public Authentication token(UserDetail detail) {
+    public JWTToken token(UserDetail detail) {
         String uuid = UUID.randomUUID().toString();
         JWTToken token = new JWTToken(uuid, detail);
         return token;
     }
 
     @Override
-    public Authentication detail(String token) {
+    public JWTToken detail(String token) {
         return new JWTToken(token, null);
     }
 }

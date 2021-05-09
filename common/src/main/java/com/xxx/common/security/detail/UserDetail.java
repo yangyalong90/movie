@@ -1,5 +1,7 @@
 package com.xxx.common.security.detail;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 public class UserDetail implements UserDetails {
 
     private String username;
+    @JsonIgnore
     private String password;
     private List<UserAuthority> authorities;
 

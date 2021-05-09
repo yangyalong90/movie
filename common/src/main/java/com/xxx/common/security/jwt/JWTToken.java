@@ -18,12 +18,12 @@ public class JWTToken extends AbstractAuthenticationToken {
     }
 
     @Override
-    public Object getCredentials() {
+    public String getCredentials() {
         return token == null ? "" : token;
     }
 
     @Override
-    public Object getPrincipal() {
+    public UserDetail getPrincipal() {
         return detail;
     }
 }

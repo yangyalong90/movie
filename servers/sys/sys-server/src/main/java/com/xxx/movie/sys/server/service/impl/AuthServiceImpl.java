@@ -63,6 +63,9 @@ public class AuthServiceImpl implements AuthService, AbstractUserDetailService {
             return true;
         }
         UserDetail userDetail = tokenCache.get(token);
+        if (userDetail == null) {
+            return false;
+        }
 
         return userDetail.getAuthorities().stream().anyMatch(userAuthority -> {
             String authority = userAuthority.getAuthority();
