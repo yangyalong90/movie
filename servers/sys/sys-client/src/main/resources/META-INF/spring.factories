@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.xxx.movie.sys.client.SysClientConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=SysClientConfig
